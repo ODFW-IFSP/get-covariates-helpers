@@ -1,13 +1,32 @@
+# Creator: Megan Sabal (megan.c.sabal@odfw.oregon.gov)
+
+# Template to download PDO data
+# from NOAA
 
 
+#...................................................................................................................
+# Install and load packages
+
+# Check if tidyverse is installed, install it if not, and then load it
+if (!requireNamespace("tidyverse", quietly = TRUE)) {
+  install.packages("tidyverse")
+}
+
+# Load libraries
 library(tidyverse)
 
+# Increase timeout limit for downloading large https files
 options(timeout = 3600)  # 1 hr (in seconds)
 
 
-# 3 - SST ----
+#...................................................................................................................
+# Instructions
 
-# Description: NOAA High-resolution Blended Analysis of Daily SST and Ice (# SST info available: https://psl.noaa.gov/data/gridded/data.noaa.oisst.v2.highres.html)
+
+# SST ----
+
+# Description: NOAA High-resolution Blended Analysis of Daily SST and Ice
+# SST info available: https://psl.noaa.gov/data/gridded/data.noaa.oisst.v2.highres.html
 # Spatial coverage: 0.25 degree latitude x 0.25 degree longitude global grid (1440x720).
 
 # Cite:
@@ -17,9 +36,9 @@ options(timeout = 3600)  # 1 hr (in seconds)
 
 # Download all relevant sst files
 
-#What years do we need data for?
+# What years do we need data for?
 years <- c(1981:2025) # If ever re-run for the entire dataset.
-years <- c(1999:2025)
+
 
 #SST file names to download
 files <- str_c("sst.day.mean.",years,".nc")
